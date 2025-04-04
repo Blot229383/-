@@ -1,8 +1,8 @@
-﻿#include <iostream>
+#include <iostream>
 #include <stdlib.h>
 using namespace std;
 
-/**Вычислить площадь и периметр прямоугольника, если задана длина одной стороны(a) 
+/**Вычислить площадь и периметр прямоугольника, если задана длина одной стороны(a)
 и коэффициент n(%), позволяющий вычислить длину второй стороны(b = n * a).*/
 
 /**
@@ -10,6 +10,13 @@ using namespace std;
  * @return введенное значение
  */
 double get();
+
+/**
+ * @brief проверка переменной
+ * @return введенное значение
+ */
+void check(const double a, const double n);
+
 
 /**
  * @brief Вычисляет площадь прямоугольника
@@ -31,13 +38,15 @@ double Perimeter(const double a, const double b);
  * @brief точка входа в программу
  * @return 0, если программа выполнена корректно, иначе 1
  */
+
 int main()
 {
     cout << "Enter first side a: ";
     double a = get();
+
     cout << "Enter ratio n %: ";
     double n = get();
-
+    check(a, n);
     double b = a * n / 100;
 
     cout << "Square is " << Square(a, b) << endl;
@@ -48,7 +57,7 @@ int main()
 
 double get()
 {
-    double value;
+    double value = 0;
     cin >> value;
     if (cin.fail())
     {
@@ -58,6 +67,20 @@ double get()
     return value;
 }
 
+void check(const double a, const double n)
+{
+    if (a > 0 and n > 0)
+    {
+        cout << "\nEntered number is positive" <<endl;
+    }
+    else
+    {
+        cout << "\nEntered number is negative" << endl;
+        abort();
+    }
+
+
+}
 
 double Square(const double a, const double b)
 {
