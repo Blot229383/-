@@ -6,16 +6,10 @@ using namespace std;
 и коэффициент n(%), позволяющий вычислить длину второй стороны(b = n * a).*/
 
 /**
- * @brief считывает значение a с клавиатуры
+ * @brief считывает значение с клавиатуры
  * @return введенное значение
  */
-double getA();
-
-/**
- * @brief считывает значение n с клавиатуры
- * @return введенное значение
- */
-double getN();
+double get();
 
 /**
  * @brief Вычисляет площадь прямоугольника
@@ -40,9 +34,9 @@ double Perimeter(const double a, const double b);
 int main()
 {
     cout << "Enter first side a: ";
-    double a = getA();
+    double a = get();
     cout << "Enter ratio n %: ";
-    double n = getN();
+    double n = get();
 
     double b = a * n / 100;
 
@@ -52,7 +46,7 @@ int main()
     return 0;
 }
 
-double getA()
+double get()
 {
     double value;
     cin >> value;
@@ -64,17 +58,6 @@ double getA()
     return value;
 }
 
-double getN()
-{
-    double value;
-    cin >> value;
-    if (cin.fail())
-    {
-        cout << "Incorrect value" << endl;
-        abort();
-    }
-    return value;
-}
 
 double Square(const double a, const double b)
 {
