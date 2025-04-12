@@ -13,10 +13,18 @@ double get();
 
 /**
  * @brief проверка переменной
- * @return введенное значение
+ * @param a - первая сторона прямоугольника
+ * @param n - коэффициент для второй стороны
  */
 void check(const double a, const double n);
 
+/**
+ * @brief расчитывает значение b
+ * @param a - первая сторона прямоугольника
+ * @param n - коэффициент для второй стороны
+ * @return b - значение второй стороны
+ */
+double getb(const double a, const double n);
 
 /**
  * @brief Вычисляет площадь прямоугольника
@@ -38,7 +46,6 @@ double Perimeter(const double a, const double b);
  * @brief точка входа в программу
  * @return 0, если программа выполнена корректно, иначе 1
  */
-
 int main()
 {
     cout << "Enter first side a: ";
@@ -47,7 +54,7 @@ int main()
     cout << "Enter ratio n %: ";
     double n = get();
     check(a, n);
-    double b = a * n / 100;
+    double b = getb(a, n);
 
     cout << "Square is " << Square(a, b) << endl;
     cout << "Perimeter is " << Perimeter(a, b) << endl;
@@ -67,19 +74,18 @@ double get()
     return value;
 }
 
+double getb(const double a, const double n)
+{
+    return a * n / 100;
+}
+
 void check(const double a, const double n)
 {
-    if (a > 0 and n > 0)
+    if (a <= 0 || n <= 0)
     {
-        cout << "\nEntered number is positive" <<endl;
-    }
-    else
-    {
-        cout << "\nEntered number is negative" << endl;
+        cout << "\nEntered number is not positive" << endl;
         abort();
     }
-
-
 }
 
 double Square(const double a, const double b)
