@@ -23,6 +23,10 @@ void tabulateFunction(double x0, double xend, double step);
  */
 double get();
 
+/**
+ * @brief Точка входа в программу
+ * @return возвращает 0, если программа выполнена верно
+*/
 int main() {
 
     cout << "Enter the start of the interval x min: ";
