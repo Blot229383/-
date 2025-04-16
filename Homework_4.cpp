@@ -17,21 +17,30 @@ double functionY(double x);
  */
 void tabulateFunction(double x0, double xend, double step);
 
+/**
+ * @brief считывает значение с клавиатуры
+ * @return введенное значение
+ */
+double get();
+
 int main() {
-    double x0, xend, step;
 
     cout << "Enter the start of the interval x min: ";
-    cin >> x0;
+    double x0=get();
 
     cout << "Enter the end of the interval x max: ";
-    cin >> xend;
+    double xend=get();
 
     cout << "Enter the step ∆x: ";
-    cin >> step;
+    double step=get();
 
     if (step <= 0) {
         cout << "Step must be positive" << endl;
         return 1;
+    }
+    if (x0 > xend) {
+        cout << " x min is greater than x max" << endl;
+        swap(x0, xend);
     }
         tabulateFunction(x0, xend, step);
     return 0;
@@ -54,4 +63,16 @@ void tabulateFunction(double x0, double xend, double step) {
         double y = functionY(x);
                     cout << y << endl;
         }
+}
+
+double get()
+{
+    double value = 0;
+    cin >> value;
+    if (cin.fail())
+    {
+        cout << "Incorrect value" << endl;
+        abort();
+    }
+    return value;
 }
