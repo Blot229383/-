@@ -36,16 +36,20 @@ int main() {
         tabulateFunction(x0, xend, step);
     return 0;
 }
+
 double functionY(double x) {
-    if (x < 0) {
-        cout << "undefined";
-        return 0;
-    }
-    return 3 * sin(sqrt(x)) + 0.39 * x - 3.8;
+    if (x > 0) 
+        return 3 * sin(sqrt(x)) + 0.39 * x - 3.8;
+        
+        else{
+          cout << "undefined ";
+       return NAN;
+        }
+    
 }
 void tabulateFunction(double x0, double xend, double step) {
     cout << "x |  y(x)" << endl;
-        for (double x = x0; x <= xend + 1e-9; x += step) {
+        for (double x = x0; x <= xend; x += step) {
         cout << x << " | ";
         double y = functionY(x);
                     cout << y << endl;
