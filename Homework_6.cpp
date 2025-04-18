@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 using namespace std;
@@ -69,6 +69,14 @@ void printIndicesGreaterThanA(int* arr, const int n, int A);
  */
 void replaceSecondWithMaxNegative(int* arr, const int n);
 
+
+
+enum {
+    FArray = 1,
+    FRandom = 2
+};
+
+
 /**
  * @brief точка входа в программу
  * @return 0, если программа выполнена корректно, иначе 1
@@ -78,14 +86,22 @@ int main()
     srand(time(0)); //инициализирование генератора rand(), чтобы при каждом запуске программы были разные случайные числа
     size_t n = getSize(); //size_t беззнаковый целочисленный тип, используется  для индексов и размера массива
     int* arr = new int[n]; //int* — это указатель на целое число, используетсяс для передачи массивов в функции
-
     cout << "Fill array manually (1) or randomly (2)? "; //выбор между рандомным заполнением и вводом с клавиатуры
     int choice = getValue();
-    if (choice == 1) {
+    switch (choice)
+    {
+    case FArray:
         fillArray(arr, n);
-    }
-    else {
+            break;
+
+    case FRandom:
+        
         fillArrayRandom(arr, n);
+                break; 
+    default:
+        cout << "Сделайте другой выбор" << endl;
+        delete[] arr;
+        return 1;
     }
 
     printArray(arr, n);
@@ -179,7 +195,7 @@ void printIndicesGreaterThanA(int* arr, const int n, int A)
     {
         if (arr[i] > A)
         {
-            cout << i+1 << " ";
+            cout << i + 1 << " ";
         }
     }
     cout << endl;
@@ -190,7 +206,7 @@ void replaceSecondWithMaxNegative(int* arr, const int n)
     int maxNegative = -11; // Минимальное возможное значение в интервале [-10, 10], чтобы при -10 не происходило замены 
     bool found = false;
     int rememberi;
-        for (size_t i = 0; i < n; i++)
+    for (size_t i = 0; i < n; i++)
     {
         if (arr[i] < 0 && arr[i] > maxNegative)
         {
