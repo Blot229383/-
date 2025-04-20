@@ -7,7 +7,7 @@ using namespace std;
  * @param x - аргумент функции
  * @return значение функции в точке x
  */
-double functionY(double x);
+double functionY(const double x);
 
 /**
  * Табулирует функцию на интервале [x0, xend] с шагом step
@@ -15,7 +15,7 @@ double functionY(double x);
  * @param xend - конечное значение x
  * @param step - шаг табуляции
  */
-void tabulateFunction(double x0, double xend, double step);
+void tabulateFunction(const double x0, double xend, double step);
 
 /**
  * @brief считывает значение с клавиатуры
@@ -42,27 +42,19 @@ int main() {
         cout << "Step must be positive" << endl;
         return 1;
     }
-    if (x0 > xend) {
-        cout << " x min is greater than x max" << endl;
-        swap(x0, xend);
-    }
         tabulateFunction(x0, xend, step);
     return 0;
 }
 
-double functionY(double x) {
+double functionY(const double x) {
     if (x > 0) 
         return 3 * sin(sqrt(x)) + 0.39 * x - 3.8;
-        
-        else{
-          cout << "undefined ";
-       return NAN;
         }
     
 }
-void tabulateFunction(double x0, double xend, double step) {
+void tabulateFunction(const double x0, double xend, double step) {
     cout << "x |  y(x)" << endl;
-        for (double x = x0; x <= xend; x += step) {
+        for (double x = x0; x < xend + step) {
         cout << x << " | ";
         double y = functionY(x);
                     cout << y << endl;
