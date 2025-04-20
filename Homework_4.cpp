@@ -30,35 +30,37 @@ double get();
 int main() {
 
     cout << "Enter the start of the interval x min: ";
-    double x0=get();
+    double x0 = get();
 
     cout << "Enter the end of the interval x max: ";
-    double xend=get();
+    double xend = get();
 
     cout << "Enter the step ∆x: ";
-    double step=get();
+    double step = get();
 
     if (step <= 0) {
         cout << "Step must be positive" << endl;
         return 1;
     }
-        tabulateFunction(x0, xend, step);
+    tabulateFunction(x0, xend, step);
     return 0;
 }
 
 double functionY(const double x) {
-    if (x > 0) 
+    if (x < 0)
+    {
+        cout << "unfinded";
+    }
         return 3 * sin(sqrt(x)) + 0.39 * x - 3.8;
-        }
-    
 }
+
 void tabulateFunction(const double x0, double xend, double step) {
     cout << "x |  y(x)" << endl;
-        for (double x = x0; x < xend + step) {
+    for (double x = x0; x <= xend; x += step) {
         cout << x << " | ";
         double y = functionY(x);
-                    cout << y << endl;
-        }
+        cout << y << endl;
+    }
 }
 
 double get()
