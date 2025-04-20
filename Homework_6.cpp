@@ -39,6 +39,14 @@ void fillArray(int* arr, const int n);
 void fillArrayRandom(int* arr, const int n);
 
 /**
+ * @brief создает копию массива
+ * @param arr - исходный массив
+ * @param n - размер массива
+ * @return указатель на новый массив-копию
+ */
+int* copyArray(int* arr, const int n);
+
+/**
  * @brief выводит элементы массива в консоль
  * @param arr - указатель на массив
  * @param n - размер массива (выводит n элементов)
@@ -69,18 +77,11 @@ void printIndicesGreaterThanA(int* arr, const int n, int A);
  */
 void replaceSecondWithMaxNegative(int* arr, const int n);
 
-
-
 enum {
     FArray = 1,
     FRandom = 2
 };
 
-
-/**
- * @brief точка входа в программу
- * @return 0, если программа выполнена корректно, иначе 1
- */
 int main()
 {
     srand(time(0)); //инициализирование генератора rand(), чтобы при каждом запуске программы были разные случайные числа
@@ -92,31 +93,33 @@ int main()
     {
     case FArray:
         fillArray(arr, n);
-            break;
-
+        break;
     case FRandom:
-        
         fillArrayRandom(arr, n);
-                break; 
+        break;
     default:
-        cout << "Сделайте другой выбор" << endl;
+        cout << "Invalid choice" << endl;
         delete[] arr;
         return 1;
     }
 
+    
+    int* arrCopy = copyArray(arr, n); // Создаем копию исходного массива
+        cout << "Original array: ";
     printArray(arr, n);
 
-    cout << "Sum of odd elements: " << sumOfElements(arr, n) << endl;
+        cout << "Sum of odd elements: " << sumOfElements(arrCopy, n) << endl;// сумма нечетных чисел
 
     cout << "Enter number A: ";
     int A = getValue();
-    printIndicesGreaterThanA(arr, n, A);
+    printIndicesGreaterThanA(arrCopy, n, A); //вывод чисел, которые больше А
 
-    replaceSecondWithMaxNegative(arr, n);
+    replaceSecondWithMaxNegative(arrCopy, n); //замена второго элемента самым большим из отрицательных
     cout << "Array after replacement: ";
-    printArray(arr, n);
+    printArray(arrCopy, n);
 
     delete[] arr;
+    delete[] arrCopy;
     return 0;
 }
 
@@ -134,7 +137,7 @@ int getValue()
 
 size_t getSize()
 {
-    std::cout << "Enter n: ";
+    cout << "Enter n: ";
     int n = getValue();
     checkN(n);
     return (size_t)n;
@@ -164,6 +167,16 @@ void fillArrayRandom(int* arr, const int n)
     {
         arr[i] = (rand() % (10 - (-10) + 1)) + (-10); // Генерация чисел в интервале [-10, 10], всего 21 число
     }
+}
+
+int* copyArray(int* arr, const int n)
+{
+    int* newArr = new int[n];
+    for (size_t i = 0; i < n; i++)
+    {
+        newArr[i] = arr[i];
+    }
+    return newArr;
 }
 
 void printArray(int* arr, const int n)
@@ -216,7 +229,7 @@ void replaceSecondWithMaxNegative(int* arr, const int n)
         }
     }
 
-    if (found && n >= 2) //&&-и
+    if (found && n >= 2)
     {
         arr[rememberi] = arr[1]; //замена места максимального из отрицательных значений на значение 2 места
         arr[1] = maxNegative;
