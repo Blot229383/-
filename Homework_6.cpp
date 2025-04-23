@@ -77,6 +77,12 @@ void printIndicesGreaterThanA(int* arr, const int n, int A);
  */
 void replaceSecondWithMaxNegative(int* arr, const int n);
 
+enum Range
+{
+    min_r = -10,
+    max_r = 10
+};
+
 enum {
     FArray = 1,
     FRandom = 2
@@ -87,7 +93,7 @@ int main()
     srand(time(0)); //инициализирование генератора rand(), чтобы при каждом запуске программы были разные случайные числа
     size_t n = getSize(); //size_t беззнаковый целочисленный тип, используется  для индексов и размера массива
     int* arr = new int[n]; //int* — это указатель на целое число, используетсяс для передачи массивов в функции
-    cout << "Fill array manually (1) or randomly (2)? "; //выбор между рандомным заполнением и вводом с клавиатуры
+    cout << "Enter the way to fill array: " <<(int) FArray << " to find manually, " << (int) FRandom << " to fill randomly ? "; //выбор между рандомным заполнением и вводом с клавиатуры
     int choice = getValue();
     switch (choice)
     {
@@ -103,12 +109,12 @@ int main()
         return 1;
     }
 
-    
+
     int* arrCopy = copyArray(arr, n); // Создаем копию исходного массива
-        cout << "Original array: ";
+    cout << "Original array: ";
     printArray(arr, n);
 
-        cout << "Sum of odd elements: " << sumOfElements(arrCopy, n) << endl;// сумма нечетных чисел
+    cout << "Sum of odd elements: " << sumOfElements(arrCopy, n) << endl;// сумма нечетных чисел
 
     cout << "Enter number A: ";
     int A = getValue();
@@ -161,11 +167,10 @@ void fillArray(int* arr, const int n)
     }
 }
 
-void fillArrayRandom(int* arr, const int n)
-{
-    for (size_t i = 0; i < n; i++)
-    {
-        arr[i] = (rand() % (10 - (-10) + 1)) + (-10); // Генерация чисел в интервале [-10, 10], всего 21 число
+void fillArrayRandom(int* arr, const int n) {
+    srand(time(0)); // Инициализация генератора случайных чисел
+    for (size_t i = 0; i < n; i++) {
+        arr[i] = min_r + rand() % (max_r - min_r + 1);  // Генерация числа в диапазоне[-10, 10] //rand() % (max - min + 1) + min
     }
 }
 
