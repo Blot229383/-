@@ -7,7 +7,7 @@ using namespace std;
  * @param x - аргумент функции
  * @return значение функции в точке x
  */
-double functionY(const double x);
+double functionY(double const x);
 
 /**
  * Табулирует функцию на интервале [x0, xend] с шагом step
@@ -15,7 +15,7 @@ double functionY(const double x);
  * @param xend - конечное значение x
  * @param step - шаг табуляции
  */
-void tabulateFunction(const double x0, double xend, double step);
+void tabulateFunction(double const x0, double const xend, double const step);
 
 /**
  * @brief считывает значение с клавиатуры
@@ -28,7 +28,6 @@ double get();
  * @return возвращает 0, если программа выполнена верно
 */
 int main() {
-
     cout << "Enter the start of the interval x min: ";
     double x0 = get();
 
@@ -42,33 +41,38 @@ int main() {
         cout << "Step must be positive" << endl;
         return 1;
     }
+    if (x0 > xend) {
+        cout << "x min is greater than x max" << endl;
+        swap(x0, xend);
+    }
+
     tabulateFunction(x0, xend, step);
     return 0;
 }
 
-double functionY(const double x) {
-    if (x < 0)
-    {
-        cout << "unfinded";
-    }
+double functionY(double x) {
+    if (x >= 0)
         return 3 * sin(sqrt(x)) + 0.39 * x - 3.8;
+    return NAN;
 }
 
-void tabulateFunction(const double x0, double xend, double step) {
-    cout << "x |  y(x)" << endl;
-    for (double x = x0; x <= xend; x += step) {
+void tabulateFunction(double x0, double xend, double step) {
+    cout << "x | y(x)" << endl;
+    for (double x = x0; x < xend + step; x += step) {
         cout << x << " | ";
         double y = functionY(x);
-        cout << y << endl;
+        if (isnan(y))
+            cout << "undefined";
+        else
+            cout << y;
+        cout << endl;
     }
 }
 
-double get()
-{
+double get() {
     double value = 0;
     cin >> value;
-    if (cin.fail())
-    {
+    if (cin.fail()) {
         cout << "Incorrect value" << endl;
         abort();
     }
