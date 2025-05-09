@@ -105,7 +105,7 @@ double sumN(const size_t n)
     double current = first;
     double result = first;
 
-    for (size_t k = 1; k <= n; ++k)
+    for (size_t k = 0; k <= n; ++k)
     {
         current = getNext(current, k - 1);
         result += current;
