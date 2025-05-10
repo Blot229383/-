@@ -56,7 +56,8 @@ double functionY(double x) {
     return NAN;
 }
 
-void tabulateFunction(double x0, double xend, double step) {
+void tabulateFunction(double x0, double xend, double step) //табулирование функции
+{
     cout << "x | y(x)" << endl;
     for (double x = x0; x < xend + step; x += step) {
         cout << x << " | ";
