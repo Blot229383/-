@@ -231,7 +231,7 @@ void printIndicesGreaterThanA(int* arr, const int n, int A)
 
 int findFirstNegativeIndex(int* arr, int n)
 {
-    for (int i = 0; i < n; i++)
+    for (size_t i = 0; i < n; i++)
     {
         if (arr[i] < 0)
         {
